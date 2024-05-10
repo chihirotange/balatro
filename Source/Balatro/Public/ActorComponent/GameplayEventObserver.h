@@ -6,6 +6,7 @@
 #include "UObject/Interface.h"
 #include "GameplayEventObserver.generated.h"
 
+class ACard;
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
 class UGameplayEventObserver : public UInterface
@@ -25,4 +26,6 @@ public:
 	virtual void PlayActionEvent() = 0;
 
 	virtual void PlayDiscardEvent() = 0;
+
+	virtual void PlayCardsEvent(const TArray<ACard*> Cards) = 0;
 };

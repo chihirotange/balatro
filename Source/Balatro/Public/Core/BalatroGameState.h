@@ -6,6 +6,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "BalatroGameState.generated.h"
 
+class ACard;
 class IGameplayEventObserver;
 /**
  * 
@@ -26,5 +27,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void BroadcastDiscardAction();
+
+	UFUNCTION(BlueprintCallable)
+	void BroadcastPlayCardsAction(const TArray<ACard*> Cards);
 	
 };

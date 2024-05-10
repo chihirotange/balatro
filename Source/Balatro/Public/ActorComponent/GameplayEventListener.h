@@ -3,17 +3,21 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Card.h"
 #include "GameplayEventObserver.h"
 #include "Components/ActorComponent.h"
 #include "GameplayEventListener.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayActionExecuted);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDiscardActionExecuted);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCardsPlayed, TArray<ACard*>, Cards);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BALATRO_API UGameplayEventListener : public UActorComponent, public IGameplayEventObserver
 {
 public:
+	virtual void PlayCardsEvent(const TArray<ACard*> Cards) override;
+
 	virtual void PlayDiscardEvent() override;
 	virtual void PlayActionEvent() override;
 
@@ -32,10 +36,14 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	//@TODO: maybe consider remove this
 	UPROPERTY(BlueprintAssignable)
 	FOnPlayActionExecuted OnPlayActionExecuted;
 
+	//@TODO: maybe consider remove this
 	UPROPERTY(BlueprintAssignable)
 	FOnDiscardActionExecuted OnDiscardActionExecuted;
-	
+
+	UPROPERTY(BlueprintAssignable)
+	FOnCardsPlayed OnCardsPlayed;
 };
