@@ -3,6 +3,15 @@
 
 #include "Card.h"
 
+int32 ACard::GetValue_Implementation()
+{
+	if(IsValid(CardData) && CardData->Implements<UHasValue>())
+	{
+		return IHasValue::Execute_GetValue(CardData);
+	}
+	return 0;
+}
+
 // Sets default values
 ACard::ACard()
 {

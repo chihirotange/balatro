@@ -12,6 +12,11 @@ void ABalatroGameState::RegisterGameplayListener(UObject* Listener)
 	}
 }
 
+void ABalatroGameState::UnsubscribeAllListeners()
+{
+	GameplayEventListeners.Empty();
+}
+
 void ABalatroGameState::BroadcastPlayAction()
 {
 	for (auto Listener : GameplayEventListeners)

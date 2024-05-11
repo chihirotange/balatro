@@ -23,6 +23,9 @@ public:
 	void RegisterGameplayListener(UObject* Listener);
 
 	UFUNCTION(BlueprintCallable)
+	void UnsubscribeAllListeners();
+
+	UFUNCTION(BlueprintCallable)
 	void BroadcastPlayAction();
 
 	UFUNCTION(BlueprintCallable)

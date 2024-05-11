@@ -11,12 +11,16 @@ enum class ECardSuit : uint8;
  * 
  */
 UCLASS()
-class BALATRO_API UPlayingCardData : public UCardData
+class BALATRO_API UPlayingCardData : public UCardData, public IHasValue
 {
+public:
+	virtual int32 GetValue_Implementation() override;
+
+private:
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere)
-	int8 CardValue;
+	int32 CardValue;
 
 	UPROPERTY(EditAnywhere)
 	ECardSuit Suit;
