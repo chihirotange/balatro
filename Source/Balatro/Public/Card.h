@@ -3,13 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HasDataAsset.h"
 #include "GameFramework/Actor.h"
 #include "Gameplay/HasValue.h"
 #include "Card/CardData.h"
 #include "Card.generated.h"
 
+class UDataAssetContainer;
+
 UCLASS(Abstract)
-class BALATRO_API ACard : public AActor, public IHasValue
+class BALATRO_API ACard : public AActor, public IHasValue, public IHasDataAsset
 {
 public:
 	virtual int32 GetValue_Implementation() override;
@@ -20,6 +23,8 @@ private:
 private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(AllowPrivateAccess))
 	UCardData* CardData;
+
+	UDataAssetContainer* DataAssetContainer;
 	
 public:	
 	// Sets default values for this actor's properties

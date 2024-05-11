@@ -1,39 +1,45 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Card.h"
+#include "Core/CardDealer.h"
 
-#include "DataAssetContainer.h"
-
-int32 ACard::GetValue_Implementation()
-{
-	if(IsValid(CardData) && CardData->Implements<UHasValue>())
-	{
-		return IHasValue::Execute_GetValue(CardData);
-	}
-	return 0;
-}
+#include "Card/DeckData.h"
 
 // Sets default values
-ACard::ACard()
+ACardDealer::ACardDealer()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	DataAssetContainer = CreateDefaultSubobject<UDataAssetContainer>("Data Asset Container");
-
 }
 
 // Called when the game starts or when spawned
-void ACard::BeginPlay()
+void ACardDealer::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ACard::Tick(float DeltaTime)
+void ACardDealer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+}
+
+void ACardDealer::DealCards()
+{
+	if(DeckToDeal)
+	{
+		auto Deck = DeckToDeal->Deck;
+		if(!DeckToDeal)
+		{
+			return;
+		}
+		for (auto Card : Deck)
+		{
+			// GetWorld()->SpawnActor<()
+		}
+	}
 }
 
