@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "HasValue.generated.h"
+#include "Usable.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(BlueprintType)
-class UHasValue : public UInterface
+class UUsable : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,17 +16,13 @@ class UHasValue : public UInterface
 /**
  * 
  */
-class BALATRO_API IHasValue
+class BALATRO_API IUsable
 {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	int32 GetValue();
-	virtual int32 GetValue_Implementation() = 0;
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void SetValue(int32 Value);
-	// virtual void SetValue_Implementation(int32 Value);
+	void Use();
+	virtual void Use_Implementation() = 0;
 };

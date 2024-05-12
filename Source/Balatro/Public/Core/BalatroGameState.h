@@ -33,6 +33,9 @@ public:
 	void BroadcastDiscardAction();
 
 	UFUNCTION(BlueprintCallable)
+	void BroadcastPlayCardAction(ACard* Card);
+
+	UFUNCTION(BlueprintCallable)
 	void BroadcastPlayCardsAction(const TArray<ACard*> Cards);
 
 	UFUNCTION(BlueprintCallable)
