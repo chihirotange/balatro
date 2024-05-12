@@ -27,10 +27,10 @@ public:
 	void UnsubscribeAllListeners();
 
 	UFUNCTION(BlueprintCallable)
-	void BroadcastPlayAction();
+	void BroadcastPlayCommand();
 
 	UFUNCTION(BlueprintCallable)
-	void BroadcastDiscardAction();
+	void BroadcastDiscardCommand();
 
 	UFUNCTION(BlueprintCallable)
 	void BroadcastPlayCardAction(ACard* Card);
@@ -40,4 +40,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void BroadcastDealCard(ACard* Card);
+
+	UFUNCTION(BlueprintCallable)
+	void BroadcastDiscardCard(ACard* DiscardedCard);
 };

@@ -32,4 +32,6 @@ public:
 	virtual void PlayCardEvent(ACard* Card) = 0;
 
 	virtual void DealCardEvent(ACard* Card) = 0;
+
+	virtual void DiscardCardEvent(ACard* DiscardedCard) = 0;
 };

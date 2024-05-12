@@ -5,6 +5,7 @@
 
 #include "Card.h"
 #include "Card/DeckData.h"
+#include "card/CardData.h"
 #include "Core/BalatroGameState.h"
 
 void ACardDealer::PrepareAvailableCards()

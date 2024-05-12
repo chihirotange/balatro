@@ -17,7 +17,7 @@ void ABalatroGameState::UnsubscribeAllListeners()
 	GameplayEventListeners.Empty();
 }
 
-void ABalatroGameState::BroadcastPlayAction()
+void ABalatroGameState::BroadcastPlayCommand()
 {
 	for (auto Listener : GameplayEventListeners)
 	{
@@ -29,7 +29,7 @@ void ABalatroGameState::BroadcastPlayAction()
 	}
 }
 
-void ABalatroGameState::BroadcastDiscardAction()
+void ABalatroGameState::BroadcastDiscardCommand()
 {
 	for (auto Listener : GameplayEventListeners)
 	{
@@ -73,6 +73,18 @@ void ABalatroGameState::BroadcastDealCard(ACard* Card)
 		if(Observer)
 		{
 			Observer->DealCardEvent(Card);
+		}
+	}
+}
+
+void ABalatroGameState::BroadcastDiscardCard(ACard* DiscardedCard)
+{
+	for (auto Listener : GameplayEventListeners)
+	{
+		auto Observer = Cast<IGameplayEventObserver>(Listener);
+		if(Observer)
+		{
+			Observer->DiscardCardEvent(DiscardedCard);
 		}
 	}
 }

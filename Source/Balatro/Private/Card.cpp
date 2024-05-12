@@ -5,6 +5,10 @@
 
 #include "DataAssetContainer.h"
 
+void ACard::Dispose_Implementation()
+{
+}
+
 UDataAsset* ACard::GetDataAsset_Implementation()
 {
 	return DataAssetContainer->GetDataAsset();
