@@ -3,9 +3,14 @@
 
 #include "DataAssetContainer.h"
 
-UDataAsset* UDataAssetContainer::GetDataAsset_Implementation()
+UDataAsset* UDataAssetContainer::GetDataAsset()
 {
-	return DataAsset;
+	return CurrentDataAsset;
+}
+
+void UDataAssetContainer::SetDataAsset(UDataAsset* DataAsset)
+{
+	CurrentDataAsset = DataAsset;
 }
 
 // Sets default values for this component's properties
@@ -13,8 +18,7 @@ UDataAssetContainer::UDataAssetContainer()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-
+	PrimaryComponentTick.bCanEverTick = false;
 	// ...
 }
 
@@ -23,17 +27,8 @@ UDataAssetContainer::UDataAssetContainer()
 void UDataAssetContainer::BeginPlay()
 {
 	Super::BeginPlay();
+	SetComponentTickEnabled(false);
 
 	// ...
 	
 }
-
-
-// Called every frame
-void UDataAssetContainer::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
-

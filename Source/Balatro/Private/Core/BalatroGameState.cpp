@@ -52,3 +52,15 @@ void ABalatroGameState::BroadcastPlayCardsAction(const TArray<ACard*> Cards)
 		}
 	}
 }
+
+void ABalatroGameState::BroadcastDealCard(ACard* Card)
+{
+	for (auto Listener : GameplayEventListeners)
+	{
+		auto Observer = Cast<IGameplayEventObserver>(Listener);
+		if(Observer)
+		{
+			Observer->DealCardEvent(Card);
+		}
+	}
+}

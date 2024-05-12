@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Card.h"
 #include "GameFramework/GameStateBase.h"
 #include "BalatroGameState.generated.h"
 
@@ -33,5 +34,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void BroadcastPlayCardsAction(const TArray<ACard*> Cards);
-	
+
+	UFUNCTION(BlueprintCallable)
+	void BroadcastDealCard(ACard* Card);
 };

@@ -28,4 +28,6 @@ public:
 	virtual void PlayDiscardEvent() = 0;
 
 	virtual void PlayCardsEvent(const TArray<ACard*> Cards) = 0;
+
+	virtual void DealCardEvent(ACard* Card) = 0;
 };

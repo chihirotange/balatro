@@ -15,15 +15,17 @@ UCLASS(Abstract)
 class BALATRO_API ACard : public AActor, public IHasValue, public IHasDataAsset
 {
 public:
-	virtual int32 GetValue_Implementation() override;
+	virtual UDataAsset* GetDataAsset_Implementation() override;
+	virtual void SetDataAsset_Implementation(UDataAsset* DataAsset) override;
 
 private:
 	GENERATED_BODY()
 
-private:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(AllowPrivateAccess))
-	UCardData* CardData;
+public:
+	virtual int32 GetValue_Implementation() override;
 
+private:
+	UPROPERTY(EditAnywhere)
 	UDataAssetContainer* DataAssetContainer;
 	
 public:	

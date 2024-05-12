@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "CardDealer.generated.h"
 
+class UCardData;
+class ABalatroGameState;
+class ACard;
 class UDeckData;
 
 UCLASS()
@@ -15,7 +18,18 @@ class BALATRO_API ACardDealer : public AActor
 private:
 	UPROPERTY(EditAnywhere)
 	UDeckData* DeckToDeal;
-	
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ACard> CardClass;
+
+	UPROPERTY(EditAnywhere)
+	bool Shuffled = true;
+
+	TArray<UCardData*> CurrentCardsAvailable;
+
+private:
+	void PrepareAvailableCards();
+
 public:	
 	// Sets default values for this actor's properties
 	ACardDealer();
@@ -28,5 +42,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void DealCards();
+	UFUNCTION(BlueprintCallable)
+	ACard* DealCard();
 };

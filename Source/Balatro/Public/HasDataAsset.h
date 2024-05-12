@@ -26,4 +26,9 @@ public:
 	UDataAsset* GetDataAsset();
 
 	virtual UDataAsset* GetDataAsset_Implementation() = 0;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetDataAsset(UDataAsset* DataAsset);
+
+	virtual void SetDataAsset_Implementation(UDataAsset* DataAsset) = 0;
 };

@@ -3,7 +3,35 @@
 
 #include "Core/CardDealer.h"
 
+#include "Card.h"
 #include "Card/DeckData.h"
+#include "Core/BalatroGameState.h"
+
+void ACardDealer::PrepareAvailableCards()
+{
+	if(!IsValid(DeckToDeal))
+	{
+		return;
+	}
+	auto Cards = DeckToDeal->Deck;
+	for (auto Card : Cards)
+	{
+		CurrentCardsAvailable.Add(Card);
+	}
+
+	if(Shuffled && CurrentCardsAvailable.Num() > 0)
+	{
+		int32 LastIndex = CurrentCardsAvailable.Num() - 1;
+		for (int32 i = 0; i <= LastIndex; ++i)
+		{
+			int32 Index = FMath::RandRange(i, LastIndex);
+			if (i != Index)
+			{
+				CurrentCardsAvailable.Swap(i, Index);
+			}
+		}
+	}
+}
 
 // Sets default values
 ACardDealer::ACardDealer()
@@ -17,29 +45,37 @@ ACardDealer::ACardDealer()
 void ACardDealer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	PrepareAvailableCards();
 }
 
 // Called every frame
 void ACardDealer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
-void ACardDealer::DealCards()
+ACard* ACardDealer::DealCard()
 {
-	if(DeckToDeal)
+	if(IsValid(DeckToDeal) && IsValid(CardClass) && !CurrentCardsAvailable.IsEmpty())
 	{
-		auto Deck = DeckToDeal->Deck;
-		if(!DeckToDeal)
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		auto DealtCard = GetWorld()->SpawnActor<ACard>(CardClass, SpawnInfo);
+
+		if(DealtCard->Implements<UHasDataAsset>())
 		{
-			return;
+			IHasDataAsset::Execute_SetDataAsset(DealtCard, CurrentCardsAvailable.Pop());
 		}
-		for (auto Card : Deck)
+
+		//notify card dealt
+		auto GameState = GetWorld()->GetGameState<ABalatroGameState>();
+		if(IsValid(GameState))
 		{
-			// GetWorld()->SpawnActor<()
+			GameState->BroadcastDealCard(DealtCard);
 		}
+		return DealtCard;
 	}
+	return nullptr;
 }
 

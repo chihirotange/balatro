@@ -5,11 +5,22 @@
 
 #include "DataAssetContainer.h"
 
+UDataAsset* ACard::GetDataAsset_Implementation()
+{
+	return DataAssetContainer->GetDataAsset();
+}
+
+void ACard::SetDataAsset_Implementation(UDataAsset* DataAsset)
+{
+	DataAssetContainer->SetDataAsset(DataAsset);
+}
+
 int32 ACard::GetValue_Implementation()
 {
-	if(IsValid(CardData) && CardData->Implements<UHasValue>())
+	auto DA = DataAssetContainer->GetDataAsset();
+	if(DA && DA->Implements<UHasValue>())
 	{
-		return IHasValue::Execute_GetValue(CardData);
+		return IHasValue::Execute_GetValue(DA);
 	}
 	return 0;
 }
@@ -20,8 +31,7 @@ ACard::ACard()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	DataAssetContainer = CreateDefaultSubobject<UDataAssetContainer>("Data Asset Container");
-
+	DataAssetContainer = CreateDefaultSubobject<UDataAssetContainer>(TEXT("Data Asset Container"));
 }
 
 // Called when the game starts or when spawned
