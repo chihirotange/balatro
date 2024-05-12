@@ -24,6 +24,9 @@ class BALATRO_API IHasValue
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	int32 GetValue();
-
 	virtual int32 GetValue_Implementation() = 0;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetValue(int32 Value);
+	virtual void SetValue_Implementation(int32 Value);
 };

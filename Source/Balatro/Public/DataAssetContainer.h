@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "DataAssetContainer.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDataAssetChanged);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BALATRO_API UDataAssetContainer : public UActorComponent
@@ -14,6 +15,9 @@ class BALATRO_API UDataAssetContainer : public UActorComponent
 public:
 	virtual UDataAsset* GetDataAsset();
 	virtual void SetDataAsset(UDataAsset* DataAsset);
+
+	UPROPERTY(BlueprintAssignable)
+	FOnDataAssetChanged OnDataAssetChanged;
 
 private:
 	GENERATED_BODY()

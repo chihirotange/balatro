@@ -11,6 +11,7 @@ UDataAsset* UDataAssetContainer::GetDataAsset()
 void UDataAssetContainer::SetDataAsset(UDataAsset* DataAsset)
 {
 	CurrentDataAsset = DataAsset;
+	OnDataAssetChanged.Broadcast();
 }
 
 // Sets default values for this component's properties
