@@ -33,6 +33,9 @@ public:
 	void BroadcastDiscardCommand();
 
 	UFUNCTION(BlueprintCallable)
+	void BroadcastDealCardCommand();
+	
+	UFUNCTION(BlueprintCallable)
 	void BroadcastPlayCardAction(ACard* Card);
 
 	UFUNCTION(BlueprintCallable)

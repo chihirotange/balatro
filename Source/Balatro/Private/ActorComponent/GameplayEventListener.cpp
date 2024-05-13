@@ -39,6 +39,11 @@ void UGameplayEventListener::TickComponent(float DeltaTime, ELevelTick TickType,
 	// ...
 }
 
+void UGameplayEventListener::PlayDealCardEvent()
+{
+	OnDealCardsActionExecuted.Broadcast();
+}
+
 void UGameplayEventListener::DiscardCardEvent(ACard* DiscardedCard)
 {
 	OnCardDiscarded.Broadcast(DiscardedCard);

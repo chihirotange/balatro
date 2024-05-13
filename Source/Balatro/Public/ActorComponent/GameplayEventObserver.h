@@ -27,6 +27,8 @@ public:
 
 	virtual void PlayDiscardEvent() = 0;
 
+	virtual void PlayDealCardEvent() = 0;
+
 	virtual void PlayCardsEvent(const TArray<ACard*> Cards) = 0;
 
 	virtual void PlayCardEvent(ACard* Card) = 0;

@@ -41,6 +41,18 @@ void ABalatroGameState::BroadcastDiscardCommand()
 	}
 }
 
+void ABalatroGameState::BroadcastDealCardCommand()
+{
+	for (auto Listener : GameplayEventListeners)
+	{
+		auto Observer = Cast<IGameplayEventObserver>(Listener);
+		if(Observer)
+		{
+			Observer->PlayDealCardEvent();
+		}
+	}
+}
+
 void ABalatroGameState::BroadcastPlayCardAction(ACard* Card)
 {
 	for (auto Listener : GameplayEventListeners)
