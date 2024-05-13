@@ -4,6 +4,21 @@
 #include "Card.h"
 
 #include "DataAssetContainer.h"
+#include "Core/Enums.h"
+
+void ACard::SetSuit_Implementation(ECardSuit Suit)
+{
+}
+
+ECardSuit ACard::GetSuit_Implementation()
+{
+	auto DataAsset = DataAssetContainer->GetDataAsset();
+	if(IsValid(DataAsset) && DataAsset->Implements<UHasSuit>())
+	{
+		return IHasSuit::Execute_GetSuit(DataAsset);
+	}
+	return ECardSuit::None;
+}
 
 void ACard::Dispose_Implementation()
 {

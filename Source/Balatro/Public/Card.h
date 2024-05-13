@@ -7,14 +7,19 @@
 #include "GameFramework/Actor.h"
 #include "Gameplay/HasValue.h"
 #include "Gameplay/Disposable.h"
+#include "Gameplay/HasSuit.h"
 #include "Card.generated.h"
 
 class UDataAssetContainer;
 
 UCLASS(Abstract)
-class BALATRO_API ACard : public AActor, public IHasValue, public IHasDataAsset, public IDisposable
+class BALATRO_API ACard : public AActor, public IHasValue, public IHasDataAsset, public IDisposable, public IHasSuit
 {
 public:
+	virtual void SetSuit_Implementation(ECardSuit Suit) override;
+
+	virtual ECardSuit GetSuit_Implementation() override;
+
 	virtual void Dispose_Implementation() override;
 
 	virtual UDataAsset* GetDataAsset_Implementation() override;
