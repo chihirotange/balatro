@@ -11,8 +11,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayActionExecuted);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDiscardActionExecuted);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDealCardsActionExecuted);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCardsPlayed, TArray<ACard*>, Cards);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCardPlayed, ACard*, Card);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCardPlayed, ACard*, Card, bool, IsLastCard);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCardDealt, ACard*, Card);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCardDiscarded, ACard*, Card);
 
@@ -24,11 +23,9 @@ public:
 
 	virtual void DiscardCardEvent(ACard* DiscardedCard) override;
 
-	virtual void PlayCardEvent(ACard* Card) override;
+	virtual void PlayCardEvent(ACard* Card, bool IsLastCard) override;
 
 	virtual void DealCardEvent(ACard* Card) override;
-
-	virtual void PlayCardsEvent(const TArray<ACard*> Cards) override;
 
 	virtual void PlayDiscardEvent() override;
 	virtual void PlayActionEvent() override;
@@ -58,9 +55,6 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnDealCardsActionExecuted OnDealCardsActionExecuted;
-
-	UPROPERTY(BlueprintAssignable)
-	FOnCardsPlayed OnCardsPlayed;
 
 	UPROPERTY(BlueprintAssignable)
 	FOnCardPlayed OnCardPlayed;

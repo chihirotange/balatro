@@ -29,9 +29,7 @@ public:
 
 	virtual void PlayDealCardEvent() = 0;
 
-	virtual void PlayCardsEvent(const TArray<ACard*> Cards) = 0;
-
-	virtual void PlayCardEvent(ACard* Card) = 0;
+	virtual void PlayCardEvent(ACard* Card, bool IsLastCard) = 0;
 
 	virtual void DealCardEvent(ACard* Card) = 0;
 

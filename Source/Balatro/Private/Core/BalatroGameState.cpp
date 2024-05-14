@@ -4,6 +4,16 @@
 #include "Core/BalatroGameState.h"
 #include "ActorComponent/GameplayEventObserver.h"
 
+void ABalatroGameState::SetTargetBind_Implementation(int64 Bind)
+{
+	TargetBind = Bind;
+}
+
+int64 ABalatroGameState::GetTargetBind_Implementation()
+{
+	return TargetBind;
+}
+
 void ABalatroGameState::RegisterGameplayListener(UObject* Listener)
 {
 	if(Listener)
@@ -53,26 +63,14 @@ void ABalatroGameState::BroadcastDealCardCommand()
 	}
 }
 
-void ABalatroGameState::BroadcastPlayCardAction(ACard* Card)
+void ABalatroGameState::BroadcastPlayCardAction(ACard* Card, bool IsLastCard)
 {
 	for (auto Listener : GameplayEventListeners)
 	{
 		auto Observer = Cast<IGameplayEventObserver>(Listener);
 		if(Observer)
 		{
-			Observer->PlayCardEvent(Card);
-		}
-	}
-}
-
-void ABalatroGameState::BroadcastPlayCardsAction(const TArray<ACard*> Cards)
-{
-	for (auto Listener : GameplayEventListeners)
-	{
-		auto Observer = Cast<IGameplayEventObserver>(Listener);
-		if(Observer)
-		{
-			Observer->PlayCardsEvent(Cards);
+			Observer->PlayCardEvent(Card, IsLastCard);
 		}
 	}
 }

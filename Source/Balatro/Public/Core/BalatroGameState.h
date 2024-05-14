@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Card.h"
 #include "GameFramework/GameStateBase.h"
+#include "Gameplay/GameplayState.h"
 #include "BalatroGameState.generated.h"
 
 class ACard;
@@ -13,12 +14,21 @@ class IGameplayEventObserver;
  * 
  */
 UCLASS()
-class BALATRO_API ABalatroGameState : public AGameStateBase
+class BALATRO_API ABalatroGameState : public AGameStateBase, public IGameplayState
 {
+public:
+	virtual void SetTargetBind_Implementation(int64 Bind) override;
+	virtual int64 GetTargetBind_Implementation() override;
+
+private:
 	GENERATED_BODY()
+
 private:
 	UPROPERTY()
 	TArray<UObject*> GameplayEventListeners;
+
+	int64 TargetBind;
+	int64 CurrentScore;
 
 public:
 	void RegisterGameplayListener(UObject* Listener);
@@ -36,10 +46,7 @@ public:
 	void BroadcastDealCardCommand();
 	
 	UFUNCTION(BlueprintCallable)
-	void BroadcastPlayCardAction(ACard* Card);
-
-	UFUNCTION(BlueprintCallable)
-	void BroadcastPlayCardsAction(const TArray<ACard*> Cards);
+	void BroadcastPlayCardAction(ACard* Card, bool IsLastCard);
 
 	UFUNCTION(BlueprintCallable)
 	void BroadcastDealCard(ACard* Card);

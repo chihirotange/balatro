@@ -49,19 +49,14 @@ void UGameplayEventListener::DiscardCardEvent(ACard* DiscardedCard)
 	OnCardDiscarded.Broadcast(DiscardedCard);
 }
 
-void UGameplayEventListener::PlayCardEvent(ACard* Card)
+void UGameplayEventListener::PlayCardEvent(ACard* Card, bool IsLastCard)
 {
-	OnCardPlayed.Broadcast(Card);
+	OnCardPlayed.Broadcast(Card, IsLastCard);
 }
 
 void UGameplayEventListener::DealCardEvent(ACard* Card)
 {
 	OnCardDealt.Broadcast(Card);
-}
-
-void UGameplayEventListener::PlayCardsEvent(const TArray<ACard*> Cards)
-{
-	OnCardsPlayed.Broadcast(Cards);
 }
 
 void UGameplayEventListener::PlayDiscardEvent()
