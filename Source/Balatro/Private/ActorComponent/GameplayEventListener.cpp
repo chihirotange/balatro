@@ -44,9 +44,9 @@ void UGameplayEventListener::PlayDealCardEvent()
 	OnDealCardsActionExecuted.Broadcast();
 }
 
-void UGameplayEventListener::DiscardCardEvent(ACard* DiscardedCard)
+void UGameplayEventListener::DiscardCardEvent(ACard* DiscardedCard, bool IsLastCard)
 {
-	OnCardDiscarded.Broadcast(DiscardedCard);
+	OnCardDiscarded.Broadcast(DiscardedCard, IsLastCard);
 }
 
 void UGameplayEventListener::PlayCardEvent(ACard* Card, bool IsLastCard)

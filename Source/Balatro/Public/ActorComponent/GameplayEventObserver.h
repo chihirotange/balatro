@@ -33,5 +33,5 @@ public:
 
 	virtual void DealCardEvent(ACard* Card) = 0;
 
-	virtual void DiscardCardEvent(ACard* DiscardedCard) = 0;
+	virtual void DiscardCardEvent(ACard* DiscardedCard, bool IsLastCard) = 0;
 };
