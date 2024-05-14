@@ -27,7 +27,9 @@ private:
 	UPROPERTY()
 	TArray<UObject*> GameplayEventListeners;
 
+	UPROPERTY(BlueprintReadWrite, Category=Bind, meta=(AllowPrivateAccess))
 	int64 TargetBind;
+	UPROPERTY(BlueprintReadWrite, Category=Bind, meta=(AllowPrivateAccess))
 	int64 CurrentScore;
 
 public:
