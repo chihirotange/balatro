@@ -87,14 +87,14 @@ void ABalatroGameState::BroadcastDealCard(ACard* Card)
 	}
 }
 
-void ABalatroGameState::BroadcastDiscardCard(ACard* DiscardedCard)
+void ABalatroGameState::BroadcastDiscardCard(ACard* DiscardedCard, bool IsLastCard)
 {
 	for (auto Listener : GameplayEventListeners)
 	{
 		auto Observer = Cast<IGameplayEventObserver>(Listener);
 		if(Observer)
 		{
-			Observer->DiscardCardEvent(DiscardedCard);
+			Observer->DiscardCardEvent(DiscardedCard, IsLastCard);
 		}
 	}
 }

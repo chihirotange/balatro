@@ -13,7 +13,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDiscardActionExecuted);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDealCardsActionExecuted);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCardPlayed, ACard*, Card, bool, IsLastCard);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCardDealt, ACard*, Card);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCardDiscarded, ACard*, Card);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCardDiscarded, ACard*, Card, bool, IsLastCard);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BALATRO_API UGameplayEventListener : public UActorComponent, public IGameplayEventObserver
@@ -21,7 +21,7 @@ class BALATRO_API UGameplayEventListener : public UActorComponent, public IGamep
 public:
 	virtual void PlayDealCardEvent() override;
 
-	virtual void DiscardCardEvent(ACard* DiscardedCard) override;
+	virtual void DiscardCardEvent(ACard* DiscardedCard, bool IsLastCard) override;
 
 	virtual void PlayCardEvent(ACard* Card, bool IsLastCard) override;
 

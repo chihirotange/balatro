@@ -54,5 +54,5 @@ public:
 	void BroadcastDealCard(ACard* Card);
 
 	UFUNCTION(BlueprintCallable)
-	void BroadcastDiscardCard(ACard* DiscardedCard);
+	void BroadcastDiscardCard(ACard* DiscardedCard, bool IsLastCard);
 };
